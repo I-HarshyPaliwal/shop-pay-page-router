@@ -1,7 +1,12 @@
+import Ad from './Ad'
+import Top from './Top'
 import styles from './styles.module.scss'
 
 export default function Header() {
   return (
-    <div>Header</div>
+    <header className={styles.header}>
+        <Ad />
+        <Top />
+    </header>
   )
 }
