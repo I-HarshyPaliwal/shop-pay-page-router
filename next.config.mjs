@@ -5,8 +5,8 @@ const __dirname = path.resolve();
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
-    includePaths: [path.join(__dirname , "styles")],
-    prependData : `@import "base.scss";`,
+    includePaths: [path.join(__dirname, "styles")],
+    prependData: `@import "base.scss";`,
   },
 };
 

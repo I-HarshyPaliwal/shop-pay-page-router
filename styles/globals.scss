@@ -7,45 +7,48 @@
   }
 }
 
-body{
+body {
   font-family: sans-serif;
   line-height: 1.5;
-  -webkit-font-smoothing : antialiased;
+  -webkit-font-smoothing: antialiased;
 }
 
-button , input , textarea , select {
+button,
+input,
+textarea,
+select {
   font: inherit;
 }
 
-p , 
-h1 , 
-h2 , 
-h3 , 
-h4 , 
-h5 , 
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
 h6 {
   overflow-wrap: break-word;
-} 
+}
 
 img,
 video,
 canvas,
 svg {
-max-width: 100%;
+  max-width: 100%;
 }
 
-a{
+a {
   text-decoration: none;
   color: inherit;
 }
 
-ul{
+ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-button{
+button {
   border: none;
   outline: none;
 }
