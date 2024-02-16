@@ -11,7 +11,7 @@ import { useState } from "react";
 import UserMenu from "./UserMenu";
 import { useSession } from "next-auth/react";
 
-export default function Top({country}) {
+export default function Top({ country }) {
   const { data: session } = useSession();
   const [visible, setVisible] = useState(false);
   return (
@@ -49,10 +49,7 @@ export default function Top({country}) {
             {session ? (
               <li className={styles.li}>
                 <div className={styles.flex}>
-                  <img
-                    src={session.user.image}
-                    alt=""
-                  />
+                  <img src={session.user.image} alt="" />
                   <span>{session.user.name}</span>
                   <RiArrowDropDownFill />
                 </div>

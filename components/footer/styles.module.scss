@@ -4,26 +4,24 @@
     position: relative;
     width: 100%;
     display: grid;
-    grid-template-areas: 
-    "links"
-    "socials"
-    "newsletter"
-    "payment"
-    "copyright"
-    ;
+    grid-template-areas:
+      "links"
+      "socials"
+      "newsletter"
+      "payment"
+      "copyright";
     gap: 3rem;
     padding: 1rem;
-    @media (min-width:800px) {
-        grid-template-areas: 
+    @media (min-width: 800px) {
+      grid-template-areas:
         "links socials"
         "links newsletter"
-        "copyright payment"
-        ;
+        "copyright payment";
     }
 
     @media (min-width: 1200px) {
-        max-width: 1200px;
-        margin: 0 auto;
+      max-width: 1200px;
+      margin: 0 auto;
     }
   }
   img {
@@ -78,79 +76,78 @@
     }
   }
 
-  &__flex{
+  &__flex {
     display: flex;
     margin-top: 10px;
   }
 
-  &__newsletter{
+  &__newsletter {
     grid-area: newsletter;
     input {
-        outline: none;
-        border: 1px solid #999;
-        flex: 1;
-        height: 40px;
-        font-size: 14px;
-        padding-left: 10px;
+      outline: none;
+      border: 1px solid #999;
+      flex: 1;
+      height: 40px;
+      font-size: 14px;
+      padding-left: 10px;
     }
-    button{
-        width: 160px; 
+    button {
+      width: 160px;
     }
-    p{
-        margin-top: 10px;
-        font-size: 12px;
-        color: #494949;
-        a{
-            color: $blue-color;
-            text-decoration: underline;
-        }
+    p {
+      margin-top: 10px;
+      font-size: 12px;
+      color: #494949;
+      a {
+        color: $blue-color;
+        text-decoration: underline;
+      }
     }
   }
 
-  &__payment{
+  &__payment {
     grid-area: payment;
   }
 
-  &__flexwrap{
+  &__flexwrap {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     margin-top: 1rem;
     img {
-        width: 60px;
-        height: 36px;
-        object-fit: cover;
+      width: 60px;
+      height: 36px;
+      object-fit: cover;
     }
   }
 
   &__copyright {
     grid-area: copyright;
     section {
-        font-size: 12px;
-        color: #494949;
-        padding-bottom: 10px;
-        
+      font-size: 12px;
+      color: #494949;
+      padding-bottom: 10px;
     }
-    ul{
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        column-gap: 2rem;
-        li{
-            position: relative;
-            text-decoration: underline;
-            &::after {
-                content: "";
-                width: 1px;
-                height: 15px;
-                background: #494949;
-                position: absolute;
-                right: -1rem;
-            }
-            &:last-of-type::after{
-                display: none;
-            }
+    ul {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      column-gap: 2rem;
+      li {
+        position: relative;
+        text-decoration: underline;
+        &::after {
+          content: "";
+          width: 1px;
+          height: 15px;
+          background: #494949;
+          position: absolute;
+          right: -1rem;
         }
+        &:last-of-type::after {
+          display: none;
+        }
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import storageSession from 'redux-persist/lib/storage/session'
+import storageSession from "redux-persist/lib/storage/session";
 
 import {
   persistReducer,
@@ -10,7 +10,7 @@ import {
   PERSIST,
   PURGE,
   REGISTER,
-} from 'redux-persist'
+} from "redux-persist";
 import cart from "./cartSlice";
 
 const reducers = combineReducers({ cart });
@@ -19,7 +19,6 @@ const config = {
   key: "root",
   storage: storageSession,
   // storage: AsyncStorage,
-
 };
 
 const reducer = persistReducer(config, reducers);
@@ -27,12 +26,12 @@ const reducer = persistReducer(config, reducers);
 const store = configureStore({
   reducer,
   devTools: process.env.NODE_ENV !== "production",
-  middleware: (getDefaultMiddleware ) =>
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }) ,
+    }),
 });
 
 export default store;
