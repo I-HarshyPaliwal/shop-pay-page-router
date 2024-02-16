@@ -9,13 +9,14 @@ import { Form, Formik } from "formik";
 import * as Yup from "yup";
 import LoginInput from "@/components/inputs/logininput";
 import CircledIconButton from "@/components/buttons/circledIconButton";
+import { getProviders, signIn } from "next-auth/react";
 
 const initialValue = {
   login_email: "",
   login_password: "",
 };
 
-export default function signin() {
+export default function signin({ providers }) {
   const [user, setUser] = useState(initialValue);
   const { login_email, login_password } = user;
   const handleChange = (e) => {
@@ -79,10 +80,38 @@ export default function signin() {
                 </Form>
               )}
             </Formik>
+            <div className={styles.login__socials}>
+              <span className={styles.or}>
+                or continue with
+              </span>
+              <div className={styles.login__socials__wrap}>
+                {
+                  providers.map((provider) => (
+                    <div key={provider.name}>
+                      <button
+                        className={styles.social__btn}
+                        onClick={() => signIn(provider.id)}
+                      >
+                        <img src={`../../icons/${provider.name}.png`} alt="" />
+                        Sign in with {provider.name}
+                      </button>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
       <Footer country={{ name: "India", flag: "https://flagcdn.com/in.svg" }} />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const providers = Object.values(await getProviders());
+  return {
+    props: { providers },
+  };
 }
