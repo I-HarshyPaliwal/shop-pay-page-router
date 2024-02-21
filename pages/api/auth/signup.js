@@ -30,12 +30,18 @@ router.post(async (req, res) => {
         }
 
         const cryptedPassword = await bcrypt.hash(password, 12);
+        // Password cryption is done
         const newUser = new User({ name, email, password: cryptedPassword });
+        // New user document created
         const addedUser = await newUser.save();
+        // New user document added to the database
+
         const activation_token = createActivationToken({
             id: addedUser._id.toString(),
-
         });
+        // This is taking "_id" from mongodb addedUser (response sent from mongodb) (this is the document that is being saved in mongodb) | converting it to a string | and pass it as a value to a key "id" in a object | That object is passed to "createActivationToken" method to create a activation token
+
+
         const url = `${process.env.BASE_URL}/activate/${activation_token}`
 
         // The mail functionality is not working 
@@ -43,6 +49,9 @@ router.post(async (req, res) => {
 
         // res.send(url);
         // res.status(200).json({ message: "Data recieved successfully" })
+
+        await db.disConnectDb();
+        res.json({ message: "Register Success ! Please activate your email to start" });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

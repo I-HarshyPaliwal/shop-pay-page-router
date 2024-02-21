@@ -19,14 +19,22 @@ const initialValue = {
   email: "",
   password: "",
   conf_password: "",
+  success: "",
+  error: "",
 };
 
 export default function signin({ providers }) {
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(initialValue);
-  const { login_email, login_password, name,
+  const {
+    login_email,
+    login_password,
+    name,
     email,
     password,
-    conf_password, } = user;
+    conf_password,
+    success,
+    error } = user;
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
@@ -61,6 +69,24 @@ export default function signin({ providers }) {
       .oneOf([Yup.ref("password")], "Passwords must match."),
   })
 
+  const signUpHandler = async () => {
+    try {
+      setLoading(true);
+      // Something happens here 
+      const { data } = await axios.post('/api/auth/signup', { name, email, password })
+      setUser({ ...user, success: data.message });
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      setUser({
+        ...user,
+        success: "",
+        error: error
+      })
+
+    }
+  }
+
   return (
     <>
       <Header country={{ name: "India", flag: "https://flagcdn.com/in.svg" }} />
@@ -81,6 +107,7 @@ export default function signin({ providers }) {
               Sign In
             </h1>
             <p>Get Access to one of the best Eshopping services in the world</p>
+            {/* Sign In using email and password */}
             <Formik
               enableReinitialize
               initialValues={{
@@ -88,6 +115,7 @@ export default function signin({ providers }) {
                 login_password,
               }}
               validationSchema={loginValidation}
+
             >
               {(form) => (
                 <Form>
@@ -112,6 +140,8 @@ export default function signin({ providers }) {
                 </Form>
               )}
             </Formik>
+
+            {/* Sign In and Sign Up both using social accounts like google | github | facebook */}
             <div className={styles.login__socials}>
               <span className={styles.or}>
                 or continue with
@@ -136,7 +166,7 @@ export default function signin({ providers }) {
           </div>
         </div>
 
-        {/* Sign Up */}
+        {/* Sign Up using email and password */}
         <div className={styles.login__container}>
 
           <div className={styles.login__form}>
@@ -153,11 +183,12 @@ export default function signin({ providers }) {
                 conf_password,
               }}
               validationSchema={registerValidation}
+              onSubmit={() => { signUpHandler() }}
             >
               {(form) => (
                 <Form>
                   <LoginInput
-                    type="email"
+                    type="text"
                     name="name"
                     icon="user"
                     placeholder="Full Name"
@@ -189,8 +220,12 @@ export default function signin({ providers }) {
                 </Form>
               )}
             </Formik>
-
-
+            {/* <div>
+              {success && <span> {success} </span>}
+            </div>
+            <div>
+              {error && <span> {error} </span>}
+            </div> */}
           </div>
         </div>
       </div>
