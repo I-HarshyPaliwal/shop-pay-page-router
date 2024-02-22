@@ -4,6 +4,11 @@ $grey-color: #f8f8f8;
 $light-error-color: #fd010169;
 $error-color: #ed4337;
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 1rem;
+}
 .btn_primary {
   display: flex;
   align-items: center;
