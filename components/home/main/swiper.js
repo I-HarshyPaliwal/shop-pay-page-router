@@ -11,7 +11,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 
 // import required modules
-import { Pagination, Navigation } from 'swiper/modules';
+import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 
 export default function MainSwiper() {
     return (
@@ -23,40 +23,22 @@ export default function MainSwiper() {
                 pagination={{
                     clickable: true,
                 }}
+                autoplay={{
+                    delay: 2000,
+                    disableOnInteraction: false,
+                }}
                 navigation={true}
-                modules={[Pagination, Navigation]}
+                modules={[Autoplay, Pagination, Navigation]}
                 className="mainSwiper"
             >
-                <SwiperSlide>
-                    <img src="../../../images/swiper/1.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/2.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/3.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/4.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/5.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/6.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/7.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/8.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/9.jpg" alt="" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="../../../images/swiper/10.jpg" alt="" />
-                </SwiperSlide>
+                {
+
+                    [...Array(10).keys()].map((i) => (
+                        <SwiperSlide key={i}>
+                            <img src={`../../../images/swiper/${i + 1}.jpg`} alt="" />
+                        </SwiperSlide>
+                    ))
+                }
 
             </Swiper>
         </>
