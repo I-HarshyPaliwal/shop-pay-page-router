@@ -33,10 +33,14 @@
     }
     .offers {
         grid-area: offers;
+        overflow: hidden;
         height: 220px;
         background: #fff;
         border-radius: 10px;
         box-shadow: $shadow-1;
+        background-image: url('../../../public/images/flash.webp');
+        background-position: -255px -100px;
+        background-size: cover;
 
     }
     .user {
