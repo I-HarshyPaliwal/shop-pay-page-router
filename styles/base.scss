@@ -8,6 +8,7 @@ $light-error-color: #fd010169;
 $error-color: #ed4337;
 $success-color: #6cc070;
 $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+$shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 .container {
   max-width: 1500px;
   margin: 0 auto;
@@ -83,7 +84,7 @@ $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   }
 }
 
-.mainSwiper ,.offers_swiper {
+.mainSwiper ,.offers_swiper,.userMenu__swiper {
   .swiper-slide img{
     height: 300px ;
     border-radius: 10px ;
@@ -192,4 +193,25 @@ $shadow-1: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     position: absolute;
     right: 10px;
   }
+}
+
+// .swiper {
+//   margin-top: 3rem;
+//   width: 200px;
+//   height: 300px;
+// }
+
+.userMenu__swiper{
+  
+  
+  .swiper-slide {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 22px;
+    font-weight: bold;
+    color: #fff;
+  }
+  
 }
