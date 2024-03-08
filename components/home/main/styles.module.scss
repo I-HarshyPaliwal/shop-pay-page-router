@@ -133,8 +133,12 @@
     .header {
         grid-area: header;
         height: 40px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: $shadow-1;
         display: flex;
         align-items: center;
+        padding-left: 5px;
 
         @media (max-width: 730px) {
             display: none !important;
@@ -143,13 +147,15 @@
         ul {
             display: flex;
             align-items: center;
+            padding: 2px;
+            padding-left: 5px;
             gap: 1rem;
 
             li {
                 display: flex;
                 height: 100%;
                 align-items: center;
-                font-size: 19px;
+                font-size: 18px;
                 color: $blue-color;
             }
         }

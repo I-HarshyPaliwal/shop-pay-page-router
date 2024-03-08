@@ -90,7 +90,8 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
 }
 
 .mainSwiper,
-.offers_swiper,
+.offers__swiper,
+.flashDeals__swiper,
 .userMenu__swiper {
   .swiper-slide img {
     height: 300px;
@@ -130,7 +131,7 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
   }
 }
 
-.offers_swiper {
+.offers__swiper {
   max-width: 550px;
   transform: translateX(33%);
 
@@ -236,4 +237,18 @@ $shadow-2: rgba(99, 99, 99, 0.1) 0px 0px 4px 0px;
     color: #fff;
   }
 
+}
+
+.flashDeals__swiper {
+  .swiper-slide {
+    img {
+      border-radius: 0 !important;
+      height: 320px !important;
+    }
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    top: 35%;
+  }
 }

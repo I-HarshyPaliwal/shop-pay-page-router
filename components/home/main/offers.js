@@ -26,7 +26,7 @@ export default function Offers() {
                 }}
                 navigation={true}
                 modules={[Pagination, Navigation]}
-                className="offers_swiper"
+                className="offers__swiper"
             >
                 {
                     offersArray.map((offer) => (
