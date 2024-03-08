@@ -34,18 +34,37 @@
         padding: 10px;
         border-radius: 10px;
 
+        @media (max-width:1300px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media (max-width:1100px) {
+            padding: 5px;
+            gap: 8px;
+        }
+
         .product {
             img {
                 border-radius: 10px;
                 height: 200px;
                 width: 100%;
                 cursor: pointer;
-                transition: transform;
+                transition: transform 0.2 ease;
+                object-fit: cover;
+
+                &:hover {
+                    transform: scale(1.02);
+                }
+
+                @media (max-width:1000px) {
+                    height: 150px;
+                }
+
+                @media (max-width:850px) {
+                    height: 200px;
+                }
             }
 
-            &:hover {
-                transform: scale(1.02);
-            }
         }
     }
 }
