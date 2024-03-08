@@ -8,8 +8,9 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import Main from "@/components/home/main";
 import FlashDeals from "@/components/home/flashDeals";
 import Category from "@/components/category";
-import { women_accessories, women_dresses, women_shoes } from "@/data/home";
+import { gamingSwiper, homeImprovSwiper, women_accessories, women_dresses, women_shoes, women_swiper } from "@/data/home";
 import { useMediaQuery } from "react-responsive";
+import ProductsSwiper from "@/components/productsSwiper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -46,6 +47,9 @@ export default function Home({ country }) {
               header='Accessories'
               products={women_accessories} background='#000' />
           </div>
+          <ProductsSwiper header='' products={women_swiper} />
+          <ProductsSwiper header='For Gamers' products={gamingSwiper} />
+          <ProductsSwiper header='House Improvement' products={homeImprovSwiper} />
         </div>
       </div>
       <Footer country={country} />
