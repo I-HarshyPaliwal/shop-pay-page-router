@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
     const [active, setActive] = useState(0);
     const [images, setImages] = useState(product.subProducts[active]?.images);
     const [prices, setPrices] = useState(
-        product.subProducts[active]?.sizes.map((s) => {
+        product?.subProducts[active].sizes.map((s) => {
             return s.price;
         }
         ).sort(
@@ -21,7 +21,7 @@ export default function ProductCard({ product }) {
     );
     // console.log(prices)
     const [styless, setStyless] = useState(
-        product.subProducts?.map((p) => {
+        product?.subProducts.map((p) => {
             return p.color;
         })
     );
@@ -44,7 +44,7 @@ export default function ProductCard({ product }) {
     return (
         <div className={styles.product}>
             <div className={styles.product__container}>
-                <Link href={`/product/${product.slug}?.style=${active}`} >
+                <Link href={`/product/${product.slug}?style=${active}`} >
                     <div>
                         <ProductSwiper images={images} />
                     </div>

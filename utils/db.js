@@ -29,7 +29,7 @@ async function disConnectDb() {
       await mongoose.disconnect();
       connection.isConnected = false;
     } else {
-      console.log("Not disconnecting from the database");
+      console.log("disconnecting from the database");
     }
   }
 }
