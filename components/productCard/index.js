@@ -72,28 +72,30 @@ export default function ProductCard({ product }) {
                         }
                     </span>
                     <div className={styles.product__colors}>
-                        {styless?.map((style, i) => {
-
-                            style.image ? (
-
-                                <img src={style.image}
-                                    className={i == active && styles.active}
-                                    onMouseOver={() => {
-                                        setImages(product.subProducts[i].images);
-                                        setActive(i);
-                                    }}
-                                    alt="" />
-                            ) : (
-                                <span
-                                    style={{ backgroundColor: `${style.color}` }}
-                                    onMouseOver={
-                                        () => {
+                        {styless &&
+                            styless.map((style, i) =>
+                                style.image ? (
+                                    <img
+                                        key={i}
+                                        src={style.image}
+                                        className={i == active && styles.active}
+                                        onMouseOver={() => {
                                             setImages(product.subProducts[i].images);
                                             setActive(i);
                                         }}
-                                ></span>
-                            )
-                        })}
+                                        alt=""
+                                    />
+                                ) : (
+                                    <span
+                                        key={i}
+                                        style={{ backgroundColor: `${style.color}` }}
+                                        onMouseOver={() => {
+                                            setImages(product.subProducts[i].images);
+                                            setActive(i);
+                                        }}
+                                    ></span>
+                                )
+                            )}
                     </div>
                 </div>
             </div>

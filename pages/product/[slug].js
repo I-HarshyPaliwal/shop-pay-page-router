@@ -10,6 +10,7 @@ import User from '@/models/User';
 import Footer from '@/components/footer';
 import MainSwiper from '@/components/productPage/mainSwiper';
 import { useState } from 'react';
+import Infos from '@/components/productPage/infos';
 
 export default function product({ product }) {
     // console.log("product", product)
@@ -34,6 +35,7 @@ export default function product({ product }) {
                     </div>
                     <div className={styles.product__main}>
                         <MainSwiper images={product.images} activeImg={activeImg} />
+                        <Infos product={product} setActiveImg={setActiveImg} />
                     </div>
                 </div>
             </div>
