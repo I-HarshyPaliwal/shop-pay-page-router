@@ -2,6 +2,7 @@ import { Rating } from '@mui/material'
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 import { useState } from 'react';
+import Link from 'next/link';
 export default function Infos({ product }) {
     const router = useRouter();
     const [size, setSize] = useState(router.query.size)
@@ -16,7 +17,7 @@ export default function Infos({ product }) {
                         defaultValue={product.rating}
                         precision={0.5}
                         readOnly
-                        style={{ color: '#FACF19', width: "140px", height: '100%' }}
+                        style={{ color: '#FACF19', width: "100%", height: '100%' }}
 
                     />
                     {product.numReviews}
@@ -24,7 +25,7 @@ export default function Infos({ product }) {
                 </div>
                 <div className={styles.infos__price}>
                     {
-                        product.priceRange ? (
+                        !size ? (
                             <h2>{product.priceRange}</h2>
                         ) : (
                             <h1>{product.price}</h1>
@@ -33,7 +34,7 @@ export default function Infos({ product }) {
                     {
                         product.discount > 0 ? (
                             <h3>
-                                <span>{product.priceBefore}</span>
+                                {size && <span>{product.priceBefore}</span>}
                                 <span>(-{product.discount}% )</span>
                             </h3>
                         ) : ('')
@@ -46,12 +47,32 @@ export default function Infos({ product }) {
                 </span>
                 <span>
                     {
-                        size ?
+                        !size ?
                             product.quantity :
                             product.sizes.reduce((start, next) => start + next.qty, 0)
                     }
                     pieces available
                 </span>
+                <div className={styles.infos__sizes}>
+                    <h4>
+                        Select a Size :
+                    </h4>
+                    <div className={styles.infos__sizes_wrap}>
+                        {
+                            product.sizes.map((size, i) => (
+                                <Link
+                                    href={`/product/${product.slug}?style=${router.query.style}&size=${i}`}
+                                    key={i}
+                                >
+                                    <div
+                                        className={`${styles.infos__sizes_size} ${i == router.query.size && styles.active_size}`}
+                                        onClick={() => setSize(size.size)}
+                                    >{size.size}</div>
+                                </Link>
+                            ))
+                        }
+                    </div>
+                </div>
             </div>
         </div>
     )
