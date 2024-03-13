@@ -1,11 +1,24 @@
+/* eslint-disable @next/next/no-img-element */
 import { Rating } from '@mui/material'
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
 import { useState } from 'react';
+import { TbMinus, TbPlus } from 'react-icons/tb'
 import Link from 'next/link';
-export default function Infos({ product }) {
+export default function Infos({ product, setActiveImg }) {
     const router = useRouter();
-    const [size, setSize] = useState(router.query.size)
+    const [size, setSize] = useState(router.query.size);
+    const [qty, setQty] = useState(1);
+    useEffect(() => {
+        setSize("");
+        setQty(1);
+    }, [router.query.style])
+    useEffect(() => {
+        if (qty > product.quantity) {
+            setQty(product.quantity);
+        }
+    }, [router.query.size]);
+
     return (
         <div className={styles.infos}>
             <div className={styles.infos__container}>
@@ -17,11 +30,11 @@ export default function Infos({ product }) {
                         defaultValue={product.rating}
                         precision={0.5}
                         readOnly
-                        style={{ color: '#FACF19', width: "100%", height: '100%' }}
+                        style={{ color: '#FACF19', width: "140px", height: '100%' }}
 
                     />
-                    {product.numReviews}
-                    {product.numReviews === 1 ? "review" : "reviews"}
+                    ({product.numReviews}
+                    {product.numReviews === 1 ? "review" : "reviews"})
                 </div>
                 <div className={styles.infos__price}>
                     {
@@ -49,8 +62,8 @@ export default function Infos({ product }) {
                     {
                         !size ?
                             product.quantity :
-                            product.sizes.reduce((start, next) => start + next.qty, 0)
-                    }
+                            product.sizes.reduce((start, next) => start + next.qty, 0)}{" "}
+
                     pieces available
                 </span>
                 <div className={styles.infos__sizes}>
@@ -72,6 +85,31 @@ export default function Infos({ product }) {
                             ))
                         }
                     </div>
+                </div>
+                <div className={styles.infos__colors}>
+                    {
+                        product.colors && product.colors.map((color, i) => (
+                            <span
+                                key={i}
+                                className={i == router.query.style ? styles.active_color : ""}
+                                onMouseOver={() => setActiveImg(product.subProducts[i].images[0].url)}
+                                onMouseLeave={() => setActiveImg("")}
+                            >
+                                <Link href={`/product/${product.slug}?style=${i}`}>
+                                    <img src={color.image} alt="" />
+                                </Link>
+                            </span>
+                        ))
+                    }
+                </div>
+                <div className={styles.infos__qty}>
+                    <button onClick={() => qty > 1 && setQty((prev) => prev - 1)}>
+                        <TbMinus />
+                    </button>
+                    <span>{qty}</span>
+                    <button onClick={() => qty < product.quantity && setQty((prev) => prev + 1)}>
+                        <TbPlus />
+                    </button>
                 </div>
             </div>
         </div>
