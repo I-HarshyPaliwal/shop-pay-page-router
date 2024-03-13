@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @next/next/no-img-element */
 import { Rating } from '@mui/material'
 import styles from './styles.module.scss'
 import { useRouter } from 'next/router'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { TbMinus, TbPlus } from 'react-icons/tb'
 import Link from 'next/link';
 export default function Infos({ product, setActiveImg }) {
@@ -60,7 +61,7 @@ export default function Infos({ product, setActiveImg }) {
                 </span>
                 <span>
                     {
-                        !size ?
+                        size ?
                             product.quantity :
                             product.sizes.reduce((start, next) => start + next.qty, 0)}{" "}
 

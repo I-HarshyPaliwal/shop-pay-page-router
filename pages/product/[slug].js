@@ -82,7 +82,7 @@ export async function getServerSideProps(context) {
         ).toFixed(2)
             : subProduct.sizes[size].price,
         pricesBefore: subProduct.sizes[size].price,
-        pricesBefore: subProduct.sizes[size].qty,
+        quantity: subProduct.sizes[size].qty,
     }
     // console.log('new Product', newProduct);
     // ---------
