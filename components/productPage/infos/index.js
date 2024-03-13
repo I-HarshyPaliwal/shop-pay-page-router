@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { BsHandbagFill, BsHeart } from 'react-icons/bs';
 import Share from '../share';
 import Accordian from './Accordian';
+import SimillarSwiper from './SimiliarSwiper';
 export default function Infos({ product, setActiveImg }) {
     const router = useRouter();
     const [size, setSize] = useState(router.query.size);
@@ -129,6 +130,7 @@ export default function Infos({ product, setActiveImg }) {
                 </div>
                 <Share />
                 <Accordian details={[product.description, ...product.details]} />
+                <SimillarSwiper />
             </div>
         </div>
     )
