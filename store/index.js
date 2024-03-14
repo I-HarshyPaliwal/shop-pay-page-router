@@ -1,37 +1,31 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { combineReducers } from "redux";
-import storageSession from "redux-persist/lib/storage/session";
-
-import {
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+import thunk from "redux-thunk";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
 import cart from "./cartSlice";
-
-const reducers = combineReducers({ cart });
+import expandSidebar from "./ExpandSlice";
+import dialog from "./DialogSlice";
+const reducers = combineReducers({ cart, expandSidebar, dialog });
 
 const config = {
   key: "root",
-  storage: storageSession,
-  // storage: AsyncStorage,
+  storage,
 };
 
 const reducer = persistReducer(config, reducers);
 
 const store = configureStore({
-  reducer,
+  reducer: reducer,
   devTools: process.env.NODE_ENV !== "production",
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      thunk: {
+        extraArgument: true,
       },
+      serializableCheck: false,
     }),
+
 });
 
 export default store;

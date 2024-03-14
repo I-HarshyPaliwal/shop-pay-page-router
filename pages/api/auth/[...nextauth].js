@@ -6,6 +6,7 @@ import Auth0Provider from "next-auth/providers/auth0";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "./lib/mongodb";
 
+
 export default NextAuth({
   adapter: MongoDBAdapter(clientPromise),
   providers: [

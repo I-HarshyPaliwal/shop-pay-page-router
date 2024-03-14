@@ -51,7 +51,7 @@ export default function signin({ providers }) {
     name: Yup.string()
       .required("What's your name")
       .min(2, "Name must be between 2 and 16 characters")
-      .max(2, "Name must be between 2 and 16 characters")
+      .max(16, "Name must be between 2 and 16 characters")
       .matches(/^[aA-zZ]/, "Numbers and Special Characters are not allowed."),
     email: Yup.string()
       .required(
