@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { TbMinus, TbPlus } from 'react-icons/tb'
 import Link from 'next/link';
 import { BsHandbagFill, BsHeart } from 'react-icons/bs';
-import Share from '../share';
+import Share from './share';
 import Accordian from './Accordian';
 import SimillarSwiper from './SimiliarSwiper';
 export default function Infos({ product, setActiveImg }) {

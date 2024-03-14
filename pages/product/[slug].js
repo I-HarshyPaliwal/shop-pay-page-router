@@ -11,6 +11,7 @@ import Footer from '@/components/footer';
 import MainSwiper from '@/components/productPage/mainSwiper';
 import { useState } from 'react';
 import Infos from '@/components/productPage/infos';
+import Reviews from '@/components/productPage/reviews';
 
 export default function product({ product }) {
     // console.log("product", product)
@@ -37,6 +38,7 @@ export default function product({ product }) {
                         <MainSwiper images={product.images} activeImg={activeImg} />
                         <Infos product={product} setActiveImg={setActiveImg} />
                     </div>
+                    <Reviews product={product} />
                 </div>
             </div>
             <Footer country='' />
@@ -83,6 +85,23 @@ export async function getServerSideProps(context) {
             : subProduct.sizes[size].price,
         pricesBefore: subProduct.sizes[size].price,
         quantity: subProduct.sizes[size].qty,
+        ratings: [
+            {
+                percentage: 76
+            },
+            {
+                percentage: 14
+            },
+            {
+                percentage: 6
+            },
+            {
+                percentage: 4
+            },
+            {
+                percentage: 0
+            },
+        ],
     }
     // console.log('new Product', newProduct);
     // ---------

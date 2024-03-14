@@ -23,7 +23,9 @@ export default function MainSwiper({ images, activeImg }) {
                     enlargedImageContainerDimensions: {
                         width: "150%",
                         height: "150%",
-                    }
+                    },
+                    enlargedImagePosition: "beside",
+                    shouldUsePositiveSpaceLens: "true"
                 }} />
             </div>
             <div className={styles.swiper__list}>
