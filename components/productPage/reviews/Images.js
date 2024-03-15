@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
 import { useRef } from "react";
 import { MdOutlineRemoveCircle } from "react-icons/md";
@@ -8,7 +9,7 @@ export default function Images({ images, setImages }) {
   const inputRef = useRef(null);
   const handleImages = (e) => {
     let files = Array.from(e.target.files);
-    console.log(files);
+    // console.log(files);
     files.forEach((img, i) => {
       if (images.length == 3 || i == 2) {
         setError("Maximum 3 images are allowed.");
