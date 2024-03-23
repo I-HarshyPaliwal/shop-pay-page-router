@@ -49,8 +49,8 @@ const ratings = [
     value: 4,
   },
   {
-    text: "2 star",
-    value: 2,
+    text: "3 star",
+    value: 3,
   },
   {
     text: "2 star",

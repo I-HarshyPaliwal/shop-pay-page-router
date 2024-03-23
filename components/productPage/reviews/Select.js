@@ -3,7 +3,7 @@ import { IoArrowDown } from "react-icons/io5";
 import { useState } from "react";
 export default function Select({ property, text, data, handleChange }) {
   const [visible, setVisible] = useState(false);
-  console.log(data);
+  // console.log(data);
   return (
     <div className={styles.select}>
       {text}:
@@ -12,9 +12,8 @@ export default function Select({ property, text, data, handleChange }) {
         onMouseOver={() => setVisible(true)}
         onMouseLeave={() => setVisible(false)}
         style={{
-          background: `${
-            text == "Style" && property.color && `${property.color}`
-          }`,
+          background: `${text == "Style" && property.color && `${property.color}`
+            }`,
         }}
       >
         <span

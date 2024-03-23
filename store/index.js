@@ -18,13 +18,15 @@ const reducer = persistReducer(config, reducers);
 const store = configureStore({
   reducer: reducer,
   devTools: process.env.NODE_ENV !== "production",
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      thunk: {
-        extraArgument: true,
-      },
-      serializableCheck: false,
-    }),
+  // middleware: getDefaultMiddleware =>
+  //   getDefaultMiddleware({
+  //     thunk: {
+  //       extraArgument: myCustomApiService
+  //     }
+  //   })
+
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+
 
 });
 
