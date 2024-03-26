@@ -37,7 +37,7 @@ export default function cart() {
             <div className={styles.cart}>
                 {cart.cartItems.length > 0 ? (
                     <div className={styles.cart__container}>
-                        <div></div>
+
                         <CartHeader
                             cartItems={cart.cartItems}
                             selected={selected}

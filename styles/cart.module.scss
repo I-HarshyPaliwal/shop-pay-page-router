@@ -39,6 +39,7 @@
     }
 
     &__products {
+        margin-top: 1rem;
         grid-area: products;
 
         @media (min-width: 900px) {
