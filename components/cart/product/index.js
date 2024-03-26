@@ -4,10 +4,46 @@ import styles from './styles.module.scss'
 import { AiOutlineDelete } from 'react-icons/ai'
 import { FaCartArrowDown } from 'react-icons/fa'
 import { MdOutlineKeyboardArrowRight } from 'react-icons/md'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateCart } from '@/store/cartSlice'
 
-export default function Product({ product }) {
+export default function Product({ product, selected, setSelected }) {
+    const { cart } = useSelector((state) => ({ ...state }));
     const [active, setActive] = useState();
+    useEffect(() => {
+        const check = selected.find((p) => p._uid === product._uid);
+        setActive(check);
+    }, [selected])
+
+    const dispatch = useDispatch();
+    const updateQty = (type) => {
+        let newcart = cart.cartItems.map((p) => {
+            if (p._uid == product._uid) {
+                return {
+                    ...p,
+                    qty: type == "plus" ? product.qty + 1 : product.qty - 1,
+                }
+            }
+            return p;
+        })
+        dispatch(updateCart(newcart))
+    }
+    const removeProduct = (id) => {
+        let newCart = cart.cartItems.filter((p) => {
+            return p._uid != id;
+        });
+        dispatch(updateCart(newCart))
+    };
+    const handleSelect = () => {
+
+        if (active) {
+            setSelected(selected.filter((p) => p._uid !== product._uid))
+        } else {
+            setSelected([...selected, product])
+        }
+    }
+
 
     return (
         <div className={`${styles.card} ${styles.product}`}>
@@ -35,7 +71,9 @@ export default function Product({ product }) {
                         </h1>
                         <div style={{ zIndex: '2' }}>
                             <BsHeart />                        </div>
-                        <div style={{ zIndex: '2' }}>
+                        <div style={{ zIndex: '2' }}
+                            onClick={() => removeProduct(product._uid)}
+                        >
                             <AiOutlineDelete />
                         </div>
                     </div>
@@ -44,7 +82,7 @@ export default function Product({ product }) {
                         {product.size && <span>
                             {product.size}</span>}
                         {product.price && <span>
-                            {product.price.toFixed(2)}</span>}
+                            {product.price.toFixed(2)}$</span>}
                         <MdOutlineKeyboardArrowRight />
                     </div>
                     <div className={styles.product__priceQty}>
@@ -68,9 +106,15 @@ export default function Product({ product }) {
                             }
                         </div>
                         <div className={styles.product__priceQty_qty}>
-                            <button disabled={product.qty < 2}>-</button>
+                            <button
+                                disabled={product.qty < 2}
+                                onClick={() => updateQty('minus')}
+                            >-</button>
                             <span>{product.qty}</span>
-                            <button disabled={product.qty == product.quantity}>+</button>
+                            <button
+                                disabled={product.qty == product.quantity}
+                                onClick={() => updateQty('plus')}
+                            >+</button>
                         </div>
                     </div>
                     <div className={styles.product__shipping}>

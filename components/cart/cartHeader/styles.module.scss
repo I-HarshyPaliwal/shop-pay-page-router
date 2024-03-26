@@ -1,0 +1,28 @@
+@import "../base";
+
+.cart__header {
+    margin-top: 1rem;
+    height: 100%;
+    width: 100%;
+
+    @media (min-width: 900px) {
+        height: 140px;
+        width: 100%;
+    }
+
+
+}
+
+.flex {
+
+    gap: 10px;
+    cursor: pointer;
+    width: 100%;
+
+
+    &:hover {
+        .checkbox {
+            border-color: $blue-color;
+        }
+    }
+}
