@@ -18,7 +18,7 @@ export default function Product({ product, selected, setSelected }) {
 
     const dispatch = useDispatch();
     const updateQty = (type) => {
-        let newcart = cart.cartItems.map((p) => {
+        let newCart = cart.cartItems.map((p) => {
             if (p._uid == product._uid) {
                 return {
                     ...p,
@@ -27,7 +27,10 @@ export default function Product({ product, selected, setSelected }) {
             }
             return p;
         })
-        dispatch(updateCart(newcart))
+
+        // console.log("newCart", newCart)
+
+        dispatch(updateCart(newCart));
     }
     const removeProduct = (id) => {
         let newCart = cart.cartItems.filter((p) => {
@@ -108,12 +111,12 @@ export default function Product({ product, selected, setSelected }) {
                         <div className={styles.product__priceQty_qty}>
                             <button
                                 disabled={product.qty < 2}
-                                onClick={() => updateQty('minus')}
+                                onClick={() => { updateQty('minus') }}
                             >-</button>
                             <span>{product.qty}</span>
                             <button
                                 disabled={product.qty == product.quantity}
-                                onClick={() => updateQty('plus')}
+                                onClick={() => { updateQty('plus') }}
                             >+</button>
                         </div>
                     </div>

@@ -9,24 +9,61 @@ import CartHeader from "@/components/cart/cartHeader";
 import Checkout from "@/components/cart/checkout";
 import { useEffect, useState } from "react";
 import PaymentMethods from "@/components/cart/paymentMethods";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
+import { saveCart } from "@/requests/user";
+import { updateCart, emptyCart } from "@/store/cartSlice";
+import axios from "axios";
+
+
 
 export default function cart() {
+    const Router = useRouter()
+    const { data: session } = useSession();
+    // console.log(session)
     const dispatch = useDispatch();
     // Global State
     const { cart } = useSelector((state) => ({ ...state }))
 
     // Local States
+
     const [selected, setSelected] = useState([])
     const [shipping, setShipping] = useState(0)
     const [subtotal, setSubtotal] = useState(0)
     const [total, setTotal] = useState(0)
+    // console.log(selected)
 
-    // useEffect Hook
+    // useEffect Hooks
+    useEffect(() => {
+        const update = async () => {
+            const { data } = await axios.post('/api/updateCart', {
+                products: cart.cartItems,
+            });
+            dispatch(updateCart(data));
+        };
+
+        if (cart.cartItems.length > 0) {
+            update();
+        }
+    }, []);
+
+
     useEffect(() => {
         setShipping(selected.reduce((a, c) => a + Number(c.shipping), 0).toFixed(2));
         setSubtotal(selected.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2));
         setTotal((selected.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2) + Number(shipping)));
     }, [selected])
+
+    const saveCartToDbHandler = async () => {
+        if (session) {
+            const res = saveCart(selected, session.user.email);
+            // return res;
+            // console.log(res)
+            Router.push('/checkout');
+        } else {
+            signIn()
+        }
+    }
 
 
 
@@ -56,6 +93,7 @@ export default function cart() {
                             shippingFee={shipping}
                             total={total}
                             selected={selected}
+                            saveCartToDbHandler={saveCartToDbHandler}
                         />
                         <PaymentMethods />
                     </div>
