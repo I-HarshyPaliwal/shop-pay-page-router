@@ -1,10 +1,10 @@
 import axios from "axios";
 
-export const saveCart = async (cart, user_email) => {
+export const saveCart = async (cart) => {
   try {
     const { data } = await axios.post("/api/user/saveCart", {
       cart,
-      user_email,
+      // user_email,
     });
     return data;
   } catch (error) {
@@ -12,17 +12,22 @@ export const saveCart = async (cart, user_email) => {
     // return response.error.data.message;
   }
 };
-export const saveAddress = async (address, userId) => {
+
+export const saveAddress = async (address) => {
   try {
+    // console.log("Address", address);
+    // console.log("UserId", userId);
     const { data } = await axios.post("/api/user/saveAddress", {
       address,
-      userId,
+      // userId,
     });
+    console.log("Data", data);
     return data;
   } catch (error) {
     return error.response.data.message;
   }
 };
+
 export const changeActiveAddress = async (id) => {
   try {
     const { data } = await axios.put("/api/user/manageAddress", {

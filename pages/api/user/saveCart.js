@@ -3,17 +3,22 @@ import User from '@/models/User';
 import Cart from '@/models/Cart';
 import db from '@/utils/db';
 import { createRouter } from 'next-connect';
+import auth from '@/middleware/auth';
 const router = createRouter();
+router.use(auth);
 
 router.post(async (req, res) => {
+
+    // console.log("User Id A ", req.user)
+    // return;
     try {
         db.connectDb();
         // console.log("Request Body", req.body)
-        const { cart, user_email } = req.body;
-        console.log("Cart", cart)
+        const { cart } = req.body;
+        // console.log("Cart", cart)
         let products = [];
 
-        let user = await User.findOne({ email: user_email });
+        let user = await User.findById(req.user);
         // console.log("User", user)
         // console.log("Check One")
         let existingCart = await Cart.findOne({ user: user._id })
@@ -31,14 +36,14 @@ router.post(async (req, res) => {
 
             // console.log("dbProduct", dbProduct)
 
-            console.log("cart[i].styles", cart[i].style)
+            // console.log("cart[i].styles", cart[i].style)
             let subProduct = dbProduct.
                 subProducts[cart[i].style];
 
             // console.log("subProduct", subProduct)
 
             // tempProduct is an empty object here
-            console.log("Check Two A")
+            // console.log("Check Two A")
             let tempProduct = {}
             tempProduct.name = dbProduct.name;
             tempProduct.product = dbProduct._id;
@@ -46,16 +51,16 @@ router.post(async (req, res) => {
                 color: cart[i].color.color,
                 image: cart[i].color.image,
             }
-            console.log("Check Two B")
+            // console.log("Check Two B")
             tempProduct.image = subProduct.images[0].url;
             tempProduct.qty = Number(cart[i].qty);
-            console.log("Check Two C")
+            // console.log("Check Two C")
             tempProduct.size = cart[i].size;
             let price = Number(
                 subProduct.sizes.find((p) => p.size == cart[i].size).price
             );
 
-            console.log("Check Two D")
+            // console.log("Check Two D")
             tempProduct.price = subProduct?.discount > 0 ? (price - price / Number(subProduct.discount)).toFixed(2) : price.toFixed(2);
 
             // console.log("Check Two E")
@@ -72,7 +77,7 @@ router.post(async (req, res) => {
 
         cartTotal = Number(cartTotal)
 
-        console.log("Check Four")
+        // console.log("Check Four")
 
         // console.log(products);
 

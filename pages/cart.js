@@ -56,7 +56,10 @@ export default function cart() {
 
     const saveCartToDbHandler = async () => {
         if (session) {
-            const res = saveCart(selected, session.user.email);
+            // const res = saveCart(selected, session.user.email);
+            // We do not need to pass the user id here as we can get it from the middleware
+
+            const res = saveCart(selected);
             // return res;
             // console.log(res)
             Router.push('/checkout');
