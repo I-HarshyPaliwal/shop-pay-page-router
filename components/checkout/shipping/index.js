@@ -102,13 +102,13 @@ export default function Shipping({ selectedAddress, setSelectedAddress, user, ad
 
     const saveShippingHandler = async () => {
         const res = await saveAddress(shipping);
-        setAddresses([...addresses, res]);
-        setSelectedAddress(res);
+        setAddresses(res.address);
+        setSelectedAddress(res.address);
     };
 
     const changeActiveHandler = async (id) => {
         const res = await changeActiveAddress(id);
-        // console.log("Response ", res)
+        console.log("Response ", res)
         setAddresses(res.addresses);
     };
     const deleteHandler = async (id) => {
@@ -119,7 +119,7 @@ export default function Shipping({ selectedAddress, setSelectedAddress, user, ad
     return (
         <div className={styles.shipping}>
             <div className={styles.addresses}>
-                {addresses.map((address) => (
+                {addresses?.map((address) => (
                     <div style={{ position: "relative" }} key={address._id}>
                         <div
                             className={styles.address__delete}

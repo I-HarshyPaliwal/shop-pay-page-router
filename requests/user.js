@@ -33,6 +33,12 @@ export const changeActiveAddress = async (id) => {
     const { data } = await axios.put("/api/user/manageAddress", {
       id,
     });
+
+    // const res = await axios.put("/api/user/manageAddress", {
+    //   id,
+    // });
+    // Here Data field is empty string
+    // console.log("Data", res);
     return data;
   } catch (error) {
     return error.response.data.message;

@@ -17,5 +17,5 @@ export default async (req, res, next) => {
     } else {
         res.status(401).json({ message: "Not Signed in " });
     }
-    res.end();
+    // res.end();
 };

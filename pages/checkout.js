@@ -8,13 +8,18 @@ import Shipping from '@/components/checkout/shipping';
 import { useEffect, useState } from 'react';
 
 export default function Checkout({ cart, user }) {
+    // console.log("User", user)
     const [addresses, setAddresses] = useState(user?.address || []);
+    // console.log("Addresses: ", addresses)
     const [selectedAddress, setSelectedAddress] = useState();
+    // console.log("selectedAddress", selectedAddress)
     useEffect(() => {
 
-        let check = addresses.find((address) => address.active == true)
+        let check = addresses?.find((address) => address.active == true)
         if (check) {
             setSelectedAddress(check)
+        } else {
+            setSelectedAddress("");
         }
     }, [addresses])
 

@@ -28,6 +28,7 @@ const reviewSchema = new mongoose.Schema({
     images: [],
     likes: [],
 });
+
 const productSchema = new mongoose.Schema(
     {
         name: {
@@ -125,6 +126,7 @@ const productSchema = new mongoose.Schema(
         timestamps: true,
     }
 );
+
 const Product =
     mongoose.models.Product || mongoose.model("Product", productSchema);
 
